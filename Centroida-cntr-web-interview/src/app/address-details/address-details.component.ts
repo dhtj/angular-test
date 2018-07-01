@@ -43,6 +43,19 @@ export class AddressDetailsComponent implements OnInit {
         });
     } else {
       // Local.
+      let currentExternalAddresses = JSON.parse(localStorage.getItem('myExternalAddresses'));
+      if (!currentExternalAddresses) {
+        return;
+      }
+      const self = this;
+      currentExternalAddresses.addresses.forEach(function (element) {
+        if (element.id ===  self.addressId) {
+          self.city = element.address.city;
+          self.street  = element.address.street;
+          self.fullName = element.name;
+          self.zipCode = element.address.zipCode;
+        }
+      });
     }
   }
 
