@@ -26,6 +26,24 @@ export class AddressDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.addressId = this.route.snapshot.params.id;
+    // If not available. Stop.
+    if (!this.addressId) {
+      return;
+    }
+    // If ID is not local, get details from the service.
+    if (!this.addressId.toString().includes('local')) {
+      // Not local.
+      this.addressService.get(this.addressId)
+        .subscribe((data) => {
+          let tempAddress = data;
+          this.city = tempAddress['address'].city;
+          this.street  = tempAddress['address'].street;
+          this.fullName = tempAddress['name'];
+          this.zipCode = tempAddress['address'].zipcode;
+        });
+    } else {
+      // Local.
+    }
   }
 
   save() {

@@ -20,8 +20,10 @@ export class AddressService {
     return this.http.get(AddressEndpoint);
   }
 
-  get(id: number): Address {
-    throw new Error('NOT IMPLEMENTED');
+  get(id: number) {
+    // Let's have a single user.
+    let addressToRequest = AddressEndpoint + '/' + id;
+    return this.http.get(addressToRequest);
   }
 
   insert(addr: Address) {
