@@ -10,19 +10,25 @@
     <h4 *ngIf="!addressId">Create new address</h4>
     <div class="form-group">
       <label>Full Name</label>
-      <input type="email" class="form-control">
+      <input type="text" class="form-control"
+             [(ngModel)]="fullName"
+      >
     </div>
     <div class="form-group">
       <label>Street</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control"
+             [(ngModel)]="street"
+      >
     </div>
     <div class="form-group">
       <label>City</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control"
+             [(ngModel)]="city">
     </div>
     <div class="form-group">
-      <label>Zipcode</label>
-      <input type="text" class="form-control">
+      <label>ZipCode</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="zipCode">
     </div>
   </div>
 </div>
