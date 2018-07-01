@@ -48,8 +48,10 @@ export class AddressDetailsComponent implements OnInit {
         return;
       }
       const self = this;
+      // Iterate through all the local addresses.
       currentExternalAddresses.addresses.forEach(function (element) {
         if (element.id ===  self.addressId) {
+          // Get the correct address.
           self.city = element.address.city;
           self.street  = element.address.street;
           self.fullName = element.name;
@@ -96,6 +98,40 @@ export class AddressDetailsComponent implements OnInit {
   }
 
   remove() {
+    this.addressId = this.route.snapshot.params.id;
+    // If not available. Stop.
+    if (!this.addressId) {
+      return;
+    }
+    // If ID is not local, get details from the service.
+    if (!this.addressId.toString().includes('local')) {
+      // Not local.
+      // Tell the user, that not local ones cannot be deleted.
+      alert('Not local!');
+    } else {
+      // Local.
+      let currentExternalAddresses = JSON.parse(localStorage.getItem('myExternalAddresses'));
+      if (!currentExternalAddresses) {
+        return;
+      }
+      const self = this;
+      // Index to remove.
+      let indexToRemove = '';
+      // Iterate through all the local addresses.
+      currentExternalAddresses.addresses.forEach(function (element, index) {
+        if (element.id ===  self.addressId) {
+          indexToRemove = index;
+        }
+      });
+      if (indexToRemove === '') {
+        alert('Not in the database!');
+        return;
+      }
+      // Splice (remove) the element.
+      currentExternalAddresses.addresses.splice(indexToRemove, 1);
+      // Set the new value.
+      localStorage.setItem('myExternalAddresses',JSON.stringify(currentExternalAddresses));
+    }
     this.router.navigate(['']);
   }
 
