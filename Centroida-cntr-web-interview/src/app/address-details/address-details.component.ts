@@ -20,7 +20,7 @@ export class AddressDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.addressId = this.route.snapshot.params.addressId;
+    this.addressId = this.route.snapshot.params.id;
   }
 
   save() {

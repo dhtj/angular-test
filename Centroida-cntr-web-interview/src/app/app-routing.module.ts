@@ -6,7 +6,8 @@ import { AddressDetailsComponent } from './address-details/address-details.compo
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'address', component: AddressDetailsComponent }
+  { path: 'address', component: AddressDetailsComponent },
+  { path: 'address/:id', component: AddressDetailsComponent }
 ];
 
 @NgModule({
