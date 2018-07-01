@@ -18,6 +18,11 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Subscribe and get data on initialization.
+    this.addressService.getAll()
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 
   select(addr: Address) {

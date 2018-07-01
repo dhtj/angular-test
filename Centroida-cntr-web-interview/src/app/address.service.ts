@@ -14,8 +14,10 @@ export class AddressService {
   ) {
   }
 
-  getAll(): Observable<Address[]> {
-    throw new Error('NOT IMPLEMENTED');
+  getAll() {
+    // Get all the data from the endpoint.
+    // Return as a promise.
+    return this.http.get(AddressEndpoint);
   }
 
   get(id: number): Address {
