@@ -29,11 +29,14 @@ export class AddressDetailsComponent implements OnInit {
   }
 
   save() {
+    // Make sure to have a name, while inserting a new address.
     if (!this.fullName  || this.fullName === '') {
       alert('Insert info!');
+      // Stop when needed.
       return;
     }
 
+    // Check local storage for functionality.
     if (this.verifyLocalStorage()){
       let currentExternalAddresses = JSON.parse(localStorage.getItem('myExternalAddresses'));
       if (!currentExternalAddresses) {
@@ -41,6 +44,7 @@ export class AddressDetailsComponent implements OnInit {
           addresses: []
         };
       }
+      // Add the new address to the list of existing ones.
       currentExternalAddresses.addresses.push({
         name: this.fullName,
         id: 'local' + currentExternalAddresses.addresses.length,
@@ -54,6 +58,7 @@ export class AddressDetailsComponent implements OnInit {
       localStorage.setItem('myExternalAddresses',JSON.stringify(currentExternalAddresses));
 
     } else {
+      // In this case the local storage is not available.
       alert('Local Storage Not Available. Aborting!');
     }
     this.router.navigate(['']);
@@ -63,6 +68,14 @@ export class AddressDetailsComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  /**
+   * Function for verification that
+   * local storage is properly
+   * functioning.
+   *
+   * @returns {boolean}
+   */
+
   verifyLocalStorage () {
     const test = 'testLocalStorage';
     try {
@@ -70,6 +83,9 @@ export class AddressDetailsComponent implements OnInit {
       localStorage.removeItem(test);
       return true;
     } catch(ex) {
+      // In case any exemption is thrown,
+      // make sure to return with a boolean
+      // of false value.
       return false;
     }
   }

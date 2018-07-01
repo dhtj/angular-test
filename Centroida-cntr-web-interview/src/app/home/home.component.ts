@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private addressService: AddressService
   ) {
+    // Initialize the addresses with an empty array.
     this.addresses = [];
   }
 
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
     if (!currentExternalAddresses) {
       return;
     }
+    // Add the new external addresses.
     currentExternalAddresses.addresses.forEach(function (element) {
       self.addresses.push(new Address(
         element.id,
