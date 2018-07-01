@@ -37,6 +37,24 @@ export class HomeComponent implements OnInit {
           ));
         });
       });
+
+    // Get the local database ones.
+    let currentExternalAddresses = JSON.parse(localStorage.getItem('myExternalAddresses'));
+    if (!currentExternalAddresses) {
+      return;
+    }
+    currentExternalAddresses.addresses.forEach(function (element) {
+      self.addresses.push(new Address(
+        element.id,
+        element.name,
+        {
+          street: element.address.street,
+          suite: element.address.suite,
+          city: element.address.city,
+          zipcode: element.address.zipcode
+        }
+      ));
+    });
   }
 
   select(addr: Address) {
