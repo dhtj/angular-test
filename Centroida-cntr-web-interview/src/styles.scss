@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+
+$teal: #37b1bf;
+$red: #f15855;
+$charcoal: #333333;
+
+
+@import '~bootstrap/scss/bootstrap';
+
+.actions {
+  button {
+    width: 120px;
+    display: block;
+    margin-bottom: 8px;
+  }
+}
+
+.address-list {
+  display: flex;
+  flex-wrap: wrap;
+  //justify-content: flex-start;
+  //align-items: flex-start;
+}
+
+.address {
+  border: 1px solid $charcoal;
+  border-radius: 5px;
+  width: 200px;
+  height: 60px;
+  padding: 8px;
+  margin: 0 8px 8px 0;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: $blue;
+  }
+
+  h4 {
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  p {
+    font-size: 0.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

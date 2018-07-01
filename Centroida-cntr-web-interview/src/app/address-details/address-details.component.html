@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-sm-4 col-md-3 col-lg-2">
+    <div class="actions">
+      <button type="button" class="btn btn-outline-success" (click)="save()">Save</button>
+      <button type="button" class="btn btn-outline-danger" (click)="remove()">Delete</button>
+    </div>
+  </div>
+  <div class="col-sm">
+    <h4 *ngIf="addressId">USER_ID: {{addressId}}</h4>
+    <h4 *ngIf="!addressId">Create new address</h4>
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="email" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Street</label>
+      <input type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>City</label>
+      <input type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Zipcode</label>
+      <input type="text" class="form-control">
+    </div>
+  </div>
+</div>
