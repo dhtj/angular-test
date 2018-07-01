@@ -15,13 +15,28 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private addressService: AddressService
-  ) { }
+  ) {
+    this.addresses = [];
+  }
 
   ngOnInit() {
+    const self = this;
     // Subscribe and get data on initialization.
     this.addressService.getAll()
       .subscribe((data) => {
-        console.log(data);
+        Object.values(data).forEach(function (element) {
+          self.addresses.push(new Address(
+            element.id,
+            element.name,
+            {
+              street: element.address.street,
+              suite: element.address.suite,
+              city: element.address.city,
+              zipcode: element.address.zipcode
+            }
+          ));
+        });
+        console.log(self.addresses);
       });
   }
 
