@@ -71,25 +71,12 @@ export class AddressDetailsComponent implements OnInit {
 
     // Check local storage for functionality.
     if (this.verifyLocalStorage()){
-      let currentExternalAddresses = JSON.parse(localStorage.getItem('myExternalAddresses'));
-      if (!currentExternalAddresses) {
-        currentExternalAddresses = {
-          addresses: []
-        };
-      }
-      // Add the new address to the list of existing ones.
-      currentExternalAddresses.addresses.push({
-        name: this.fullName,
-        id: 'local' + currentExternalAddresses.addresses.length,
-        address: {
-          street: this.street,
-          city: this.city,
-          zipCode: this.zipCode,
-          suite: 'not-available'
-        }
+      this.addressService.insert({
+        fullName: this.fullName,
+        street: this.street,
+        city: this.city,
+        zipCode: this.zipCode
       });
-      localStorage.setItem('myExternalAddresses',JSON.stringify(currentExternalAddresses));
-
     } else {
       // In this case the local storage is not available.
       alert('Local Storage Not Available. Aborting!');
@@ -110,28 +97,9 @@ export class AddressDetailsComponent implements OnInit {
       alert('Not local!');
     } else {
       // Local.
-      let currentExternalAddresses = JSON.parse(localStorage.getItem('myExternalAddresses'));
-      if (!currentExternalAddresses) {
-        return;
-      }
-      const self = this;
-      // Index to remove.
-      let indexToRemove = '';
-      // Iterate through all the local addresses.
-      currentExternalAddresses.addresses.forEach(function (element, index) {
-        if (element.id ===  self.addressId) {
-          indexToRemove = index;
-        }
-      });
-      if (indexToRemove === '') {
-        alert('Not in the database!');
-        return;
-      }
-      // Splice (remove) the element.
-      currentExternalAddresses.addresses.splice(indexToRemove, 1);
-      // Set the new value.
-      localStorage.setItem('myExternalAddresses',JSON.stringify(currentExternalAddresses));
+      this.addressService.remove(this.addressId);
     }
+    // Return to main route.
     this.router.navigate(['']);
   }
 

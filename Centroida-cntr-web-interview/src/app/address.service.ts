@@ -26,12 +26,48 @@ export class AddressService {
     return this.http.get(addressToRequest);
   }
 
-  insert(addr: Address) {
-    throw new Error('NOT IMPLEMENTED');
+  insert(addressData) {
+    let currentExternalAddresses = JSON.parse(localStorage.getItem('myExternalAddresses'));
+    if (!currentExternalAddresses) {
+      currentExternalAddresses = {
+        addresses: []
+      };
+    }
+    // Add the new address to the list of existing ones.
+    currentExternalAddresses.addresses.push({
+      name: addressData.fullName,
+      id: 'local' + currentExternalAddresses.addresses.length,
+      address: {
+        street: addressData.street,
+        city: addressData.city,
+        zipCode: addressData.zipCode,
+        suite: 'not-available'
+      }
+    });
+    localStorage.setItem('myExternalAddresses',JSON.stringify(currentExternalAddresses));
   }
 
   remove(id: number) {
-    throw new Error('NOT IMPLEMENTED');
+    let currentExternalAddresses = JSON.parse(localStorage.getItem('myExternalAddresses'));
+    if (!currentExternalAddresses) {
+      return;
+    }
+    // Index to remove.
+    let indexToRemove = '';
+    // Iterate through all the local addresses.
+    currentExternalAddresses.addresses.forEach(function (element, index) {
+      if (element.id ===  id) {
+        indexToRemove = index;
+      }
+    });
+    if (indexToRemove === '') {
+      alert('Not in the database!');
+      return;
+    }
+    // Splice (remove) the element.
+    currentExternalAddresses.addresses.splice(indexToRemove, 1);
+    // Set the new value.
+    localStorage.setItem('myExternalAddresses',JSON.stringify(currentExternalAddresses));
   }
 
 
