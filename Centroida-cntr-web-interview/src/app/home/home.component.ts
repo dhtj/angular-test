@@ -60,7 +60,8 @@ export class HomeComponent implements OnInit {
   }
 
   select(addr: Address) {
-    this.router.navigate(['address', 1]);
+    // When selecting, make sure to select the proper id.
+    this.router.navigate(['address', addr.id]);
   }
 
   create() {

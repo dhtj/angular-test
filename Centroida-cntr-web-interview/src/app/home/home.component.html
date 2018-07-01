@@ -7,8 +7,8 @@
   <div class="col-sm">
     <div class="address-list">
       <div class="address"
-           (click)="select()"
            *ngFor="let addressPiece of addresses; let i = index"
+           (click)="select(addressPiece)"
       >
         <h4>{{ addressPiece.name }}</h4>
         <p>{{ addressPiece.address.city }}, {{ addressPiece.address.suite }}</p>
