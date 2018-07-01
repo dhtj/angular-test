@@ -29,6 +29,11 @@ export class AddressDetailsComponent implements OnInit {
   }
 
   save() {
+    if (!this.fullName  || this.fullName === '') {
+      alert('Insert info!');
+      return;
+    }
+
     if (this.verifyLocalStorage()){
       let currentExternalAddresses = JSON.parse(localStorage.getItem('myExternalAddresses'));
       if (!currentExternalAddresses) {
