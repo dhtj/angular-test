@@ -6,21 +6,12 @@
   </div>
   <div class="col-sm">
     <div class="address-list">
-      <div class="address" (click)="select()">
-        <h4>Leanne Graham</h4>
-        <p>Kulas Light, Apt. 556</p>
-      </div>
-      <div class="address" (click)="select()">
-        <h4>Ervin Howell</h4>
-        <p>Victor Plains, Suite 879</p>
-      </div>
-      <div class="address" (click)="select()">
-        <h4>Clementine Bauch</h4>
-        <p>Douglas Extension, Suite 847</p>
-      </div>
-      <div class="address" (click)="select()">
-        <h4>Patricia Lebsack</h4>
-        <p>Hoeger Mall, Apt. 692</p>
+      <div class="address"
+           (click)="select()"
+           *ngFor="let addressPiece of addresses; let i = index"
+      >
+        <h4>{{ addressPiece.name }}</h4>
+        <p>{{ addressPiece.address.city }}, {{ addressPiece.address.suite }}</p>
       </div>
     </div>
   </div>
